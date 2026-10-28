@@ -1,0 +1,15 @@
+model Work {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  type        String   // "image" | "video"
+  mediaUrl    String   @map("media_url")
+  posterUrl   String?  @map("poster_url")
+  description String
+  sortOrder   Int      @default(0) @map("sort_order")
+  published   Boolean  @default(true)
+  images      String?  @map("images")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("works")
+}

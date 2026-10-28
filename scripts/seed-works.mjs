@@ -1,0 +1,271 @@
+import pg from '../node_modules/.pnpm/pg@8.20.0/node_modules/pg/lib/index.js';
+
+import dotenv from 'dotenv';
+import path from 'node:path';
+
+dotenv.config({ path: path.join(process.cwd(), 'apps', 'web', '.env') });
+
+const connectionString = process.env.DIRECT_URL || process.env.DATABASE_URL;
+
+if (!connectionString) {
+  console.error("Missing DATABASE_URL / DIRECT_URL in apps/web/.env");
+  process.exit(1);
+}
+
+const client = new pg.Client({ connectionString });
+await client.connect();
+
+const works = [
+  {
+    id: "perfume-case-study",
+    title: "Perfume Luxe — Digital Experience",
+    category: "UI/UX",
+    type: "image",
+    media_url: "/works/Perfume/cover 1.png",
+    poster_url: null,
+    images: JSON.stringify([
+      "/works/Perfume/cover 1.png",
+      "/works/Perfume/overview 1.png",
+      "/works/Perfume/slide-01 1.png",
+      "/works/Perfume/slide-02 1.png",
+      "/works/Perfume/slide-03 1.png",
+      "/works/Perfume/slide-04 1.png",
+      "/works/Perfume/slide-05 1.png",
+      "/works/Perfume/slide-06 1.png",
+      "/works/Perfume/slide-07 1.png",
+      "/works/Perfume/slide-08 1.png"
+    ]),
+    description: "Complete 10-slide luxury fragrance digital experience, product showcase and conversion funnel.",
+    sort_order: 1,
+    published: true,
+  },
+  {
+    id: "rolex-oyster-perpetual",
+    title: "Rolex Oyster Perpetual — Interactive UI",
+    category: "UI/UX",
+    type: "image",
+    media_url: "/works/Rolex/rolex-slide-1(1).png",
+    poster_url: null,
+    images: JSON.stringify([
+      "/works/Rolex/rolex-slide-1(1).png",
+      "/works/Rolex/rolex-slide-2(1).png",
+      "/works/Rolex/rolex-slide-3(1).png",
+      "/works/Rolex/rolex-slide-4(1).png",
+      "/works/Rolex/rolex-slide-5(1).png",
+      "/works/Rolex/rolex-slide-6.png"
+    ]),
+    description: "Precision horology concept with interactive model viewing, typography mastery and luxury aesthetics.",
+    sort_order: 2,
+    published: true,
+  },
+  {
+    id: "modern-chronograph-app",
+    title: "Modern Chronograph — Watch Companion App",
+    category: "UI/UX",
+    type: "image",
+    media_url: "/works/Watch/1.png",
+    poster_url: null,
+    images: JSON.stringify([
+      "/works/Watch/1.png",
+      "/works/Watch/2.png",
+      "/works/Watch/3.png",
+      "/works/Watch/4.png",
+      "/works/Watch/5.jpg",
+      "/works/Watch/6.jpg",
+      "/works/Watch/7.jpg"
+    ]),
+    description: "Sleek timekeeping companion app UI with fluid data visualization and tactile micro-details.",
+    sort_order: 3,
+    published: true,
+  },
+  {
+    id: "orla-furniture",
+    title: "ORLA — Quiet Luxury Furniture Web Concept",
+    category: "Web",
+    type: "image",
+    media_url: "/works/orla-luxury-furniture.jpg",
+    poster_url: null,
+    images: null,
+    description: "Minimalist Scandinavian furniture e-commerce experience crafted for seamless catalog navigation.",
+    sort_order: 4,
+    published: true,
+  },
+  {
+    id: "amazon-maven-lane",
+    title: "Maven Lane — Amazon Brand Storefront UX",
+    category: "Web",
+    type: "image",
+    media_url: "/works/amazon-maven-lane.jpg",
+    poster_url: null,
+    images: null,
+    description: "High-converting brand storefront architecture designed to maximize engagement and cart value.",
+    sort_order: 5,
+    published: true,
+  },
+  {
+    id: "ui-interaction-motion",
+    title: "Interactive Prototype — Motion & Flow",
+    category: "Web",
+    type: "video",
+    media_url: "/works/videos/ui-interaction-showcase-1.mp4",
+    poster_url: "/works/posters/poster-1.jpg",
+    images: null,
+    description: "Dynamic layout animations, state transitions and fluid scroll choreography.",
+    sort_order: 6,
+    published: true,
+  },
+  {
+    id: "minimalist-website-template",
+    title: "Minimalist Agency Template — Clean & Bold",
+    category: "Web",
+    type: "image",
+    media_url: "/works/minimalist-website-template.jpg",
+    poster_url: null,
+    images: null,
+    description: "Modern typography-driven editorial web template built for agencies and creators.",
+    sort_order: 7,
+    published: true,
+  },
+  {
+    id: "mobile-fluid-gestures",
+    title: "Mobile App Flow — Tactile Micro-interactions",
+    category: "UI/UX",
+    type: "video",
+    media_url: "/works/videos/ui-interaction-showcase-2.mp4",
+    poster_url: "/works/posters/poster-2.jpg",
+    images: null,
+    description: "Smooth swipe interactions, tactile feedback and native-feeling mobile components.",
+    sort_order: 8,
+    published: true,
+  },
+  {
+    id: "brand-identity-system",
+    title: "Design System & Brand Identity Kit",
+    category: "Branding",
+    type: "image",
+    media_url: "/works/brand-identity-cover.png",
+    poster_url: null,
+    images: null,
+    description: "Comprehensive brand identity guidelines, typography scales, color palettes and print collateral.",
+    sort_order: 9,
+    published: true,
+  },
+  {
+    id: "interactive-analytics-dashboard",
+    title: "Real-time Metrics & Analytics Dashboard",
+    category: "UI/UX",
+    type: "video",
+    media_url: "/works/videos/ui-interaction-showcase-3.mp4",
+    poster_url: "/works/posters/poster-3.jpg",
+    images: null,
+    description: "Real-time metrics visualizer with smooth chart renders and contextual action drawers.",
+    sort_order: 10,
+    published: true,
+  },
+  {
+    id: "presentation-keynote-deck",
+    title: "Keynote Presentation Deck & Pitch System",
+    category: "Presentations",
+    type: "image",
+    media_url: "/works/portfolio-main-concept.png",
+    poster_url: null,
+    images: null,
+    description: "Cinematic keynote slide deck designed for executive announcements and venture pitching.",
+    sort_order: 11,
+    published: true,
+  },
+  {
+    id: "event-stage-motion",
+    title: "Event Stage Graphics & Immersive Visuals",
+    category: "Events",
+    type: "video",
+    media_url: "/works/videos/ui-interaction-showcase-4.mp4",
+    poster_url: "/works/posters/poster-4.jpg",
+    images: null,
+    description: "High-impact motion graphics crafted for LED stage walls, live streams and brand activations.",
+    sort_order: 12,
+    published: true,
+  },
+  {
+    id: "perfume-campaign-landing",
+    title: "Perfume Launch Campaign & Landing Page",
+    category: "UI/UX",
+    type: "image",
+    media_url: "/works/perfume-landing-post.png",
+    poster_url: null,
+    images: null,
+    description: "Editorial fragrance launch campaign with immersive visual storytelling.",
+    sort_order: 13,
+    published: true,
+  },
+  {
+    id: "hardware-product-showcase",
+    title: "Ergonomic Hardware — Launch & Social Kit",
+    category: "Branding",
+    type: "image",
+    media_url: "/works/mouse-instagram-post.png",
+    poster_url: null,
+    images: null,
+    description: "Geometric hardware rendering, clean promotional collateral and social graphics.",
+    sort_order: 14,
+    published: true,
+  },
+  {
+    id: "checkout-micro-animation",
+    title: "Frictionless Checkout & Payment Animation",
+    category: "Web",
+    type: "video",
+    media_url: "/works/videos/ui-interaction-showcase-5.mp4",
+    poster_url: "/works/posters/poster-5.jpg",
+    images: null,
+    description: "Frictionless checkout flow with optimistic state updates and delightful payment confirmations.",
+    sort_order: 15,
+    published: true,
+  },
+  {
+    id: "agency-showreel-motion",
+    title: "Creative Showreel & Dynamic Typography",
+    category: "Presentations",
+    type: "video",
+    media_url: "/works/videos/ui-interaction-showcase-6.mp4",
+    poster_url: "/works/posters/poster-6.jpg",
+    images: null,
+    description: "High-energy brand reel showcasing dynamic typography, kinetic layouts and audio-synced cuts.",
+    sort_order: 16,
+    published: true,
+  }
+];
+
+console.log("Seeding works table...");
+
+for (const w of works) {
+  const query = `
+    INSERT INTO "works" ("id", "title", "category", "type", "media_url", "poster_url", "images", "description", "sort_order", "published", "created_at")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW())
+    ON CONFLICT ("id") DO UPDATE SET
+      "title" = EXCLUDED."title",
+      "category" = EXCLUDED."category",
+      "type" = EXCLUDED."type",
+      "media_url" = EXCLUDED."media_url",
+      "poster_url" = EXCLUDED."poster_url",
+      "images" = EXCLUDED."images",
+      "description" = EXCLUDED."description",
+      "sort_order" = EXCLUDED."sort_order",
+      "published" = EXCLUDED."published";
+  `;
+  await client.query(query, [
+    w.id,
+    w.title,
+    w.category,
+    w.type,
+    w.media_url,
+    w.poster_url,
+    w.images,
+    w.description,
+    w.sort_order,
+    w.published
+  ]);
+}
+
+console.log(`Successfully seeded ${works.length} works!`);
+await client.end();

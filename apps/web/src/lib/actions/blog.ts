@@ -193,45 +193,60 @@ export async function getPublishedPosts(opts: {
   const limit = opts.limit ?? 10;
   const skip = (page - 1) * limit;
 
-  const [posts, total] = await Promise.all([
-    prisma.post.findMany({
-      where: { published: true },
-      orderBy: { publishedAt: "desc" },
-      skip,
-      take: limit,
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        excerpt: true,
-        publishedAt: true,
-        metaTitle: true,
-        metaDescription: true,
-        ogImage: true,
-        author: {
-          select: { name: true, image: true },
+  try {
+    const [posts, total] = await Promise.all([
+      prisma.post.findMany({
+        where: { published: true },
+        orderBy: { publishedAt: "desc" },
+        skip,
+        take: limit,
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          excerpt: true,
+          publishedAt: true,
+          metaTitle: true,
+          metaDescription: true,
+          ogImage: true,
+          author: {
+            select: { name: true, image: true },
+          },
         },
-      },
-    }),
-    prisma.post.count({ where: { published: true } }),
-  ]);
+      }),
+      prisma.post.count({ where: { published: true } }),
+    ]);
 
-  return {
-    posts,
-    total,
-    pages: Math.ceil(total / limit),
-    currentPage: page,
-  };
+    return {
+      posts,
+      total,
+      pages: Math.ceil(total / limit),
+      currentPage: page,
+    };
+  } catch (err) {
+    console.error("[getPublishedPosts] Database query failed:", err);
+    return {
+      posts: [],
+      total: 0,
+      pages: 1,
+      currentPage: page,
+    };
+  }
 }
 
 export async function getPostBySlug(slug: string) {
-  const post = await prisma.post.findUnique({
-    where: { slug, published: true },
-    include: {
-      author: {
-        select: { id: true, name: true, image: true },
+  try {
+    const post = await prisma.post.findUnique({
+      where: { slug, published: true },
+      include: {
+        author: {
+          select: { id: true, name: true, image: true },
+        },
       },
-    },
-  });
-  return post;
+    });
+    return post;
+  } catch (err) {
+    console.error(`[getPostBySlug] Database query failed for slug "${slug}":`, err);
+    return null;
+  }
 }

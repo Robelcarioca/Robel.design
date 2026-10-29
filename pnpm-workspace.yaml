@@ -7,3 +7,10 @@ catalog:
   typescript: ^5
   "@prisma/client": ^7.4.2
   better-auth: ^1.5.1
+
+onlyBuiltDependencies:
+  - "@prisma/engines"
+  - esbuild
+  - prisma
+  - sharp
+

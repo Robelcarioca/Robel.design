@@ -5,10 +5,11 @@ import { Prisma, PrismaClient } from "../prisma/generated/client";
 
 function resolveConnectionString(): string {
   const candidates = [
-    process.env.DIRECT_URL,
-    process.env.POSTGRES_URL_NON_POOLING,
     process.env.DATABASE_URL,
+    process.env.POSTGRES_PRISMA_URL,
     process.env.POSTGRES_URL,
+    process.env.POSTGRES_URL_NON_POOLING,
+    process.env.DIRECT_URL,
   ];
 
   for (const value of candidates) {
@@ -20,12 +21,26 @@ function resolveConnectionString(): string {
   }
 
   throw new Error(
-    "No valid Postgres connection string found. Set DIRECT_URL, POSTGRES_URL_NON_POOLING, DATABASE_URL, or POSTGRES_URL to a postgres:// URL.",
+    "No valid Postgres connection string found. Set DATABASE_URL, POSTGRES_PRISMA_URL, POSTGRES_URL, or DIRECT_URL to a postgres:// URL.",
   );
 }
 
-const adapter = new PrismaPg({ connectionString: resolveConnectionString() });
-const prisma = new PrismaClient({ adapter });
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+
+function createPrismaClient(): PrismaClient {
+  const connectionString = resolveConnectionString();
+  const adapter = new PrismaPg({
+    connectionString,
+    max: 5,
+  });
+  return new PrismaClient({ adapter });
+}
+
+const prisma = globalForPrisma.prisma ?? createPrismaClient();
+
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
 
 export default prisma;
 export { Prisma };

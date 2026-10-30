@@ -453,6 +453,18 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "published": true
   },
   {
+    "id": "nike-dunk-low-retro",
+    "title": "Nike Dunk Low Retro — Interactive Colorway Experience",
+    "category": "UI/UX",
+    "type": "image",
+    "mediaUrl": "https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Nike/nike_01_landscape.jpg",
+    "posterUrl": null,
+    "images": "[\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Nike/nike_01_landscape.jpg\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Nike/nike_02_landscape.jpg\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Nike/nike_03_landscape.jpg\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Nike/nike_04_landscape.jpg\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Nike/nike_05_landscape.jpg\"]",
+    "description": "Nike Dunk Low Retro product page concept featuring dynamic colorway switching across Cosmic Clay, Pine Green, Plum, and Royal Blue — with annotated design details, size selector, and full-bleed brand theming.",
+    "sortOrder": 37,
+    "published": true
+  },
+  {
     "id": "perfume-case-study",
     "title": "Perfume Luxe — Digital Brand Experience",
     "category": "UI/UX",
@@ -461,7 +473,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": "[\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_01.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_02.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_03.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_04.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_05.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_06.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_07.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_08.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_09.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Perfume/ambre_10.png\"]",
     "description": "Complete 10-slide luxury fragrance digital experience, product showcase and conversion funnel.",
-    "sortOrder": 37,
+    "sortOrder": 38,
     "published": true
   },
   {
@@ -473,7 +485,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "Editorial fragrance launch campaign with immersive visual storytelling.",
-    "sortOrder": 38,
+    "sortOrder": 39,
     "published": true
   },
   {
@@ -485,7 +497,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": "[\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Rolex/rolex_01.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Rolex/rolex_02.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Rolex/rolex_03.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Rolex/rolex_04.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Rolex/rolex_05.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Rolex/rolex_06.png\"]",
     "description": "Precision horology concept with interactive model viewing, typography mastery and luxury aesthetics.",
-    "sortOrder": 39,
+    "sortOrder": 40,
     "published": true
   },
   {
@@ -497,7 +509,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": "[\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Watch/1.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Watch/2.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Watch/3.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Watch/4.png\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Watch/5.jpg\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Watch/6.jpg\",\"https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Watch/7.jpg\"]",
     "description": "Sleek timekeeping companion app UI with fluid data visualization and tactile micro-details.",
-    "sortOrder": 40,
+    "sortOrder": 41,
     "published": true
   },
   {
@@ -509,7 +521,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "High-energy athletic portal with live fixtures, dynamic player cards, and immersive dark-mode UI.",
-    "sortOrder": 41,
+    "sortOrder": 42,
     "published": true
   },
   {
@@ -521,7 +533,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "Enterprise SaaS landing page and product dashboard designed to communicate cutting-edge AI infrastructure.",
-    "sortOrder": 42,
+    "sortOrder": 43,
     "published": true
   },
   {
@@ -533,7 +545,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "Geometric hardware rendering, clean promotional collateral and social graphics.",
-    "sortOrder": 43,
+    "sortOrder": 44,
     "published": true
   },
   {
@@ -545,7 +557,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "Abstract geometric artwork exploring structural balance, depth, and minimalist graphic design.",
-    "sortOrder": 44,
+    "sortOrder": 45,
     "published": true
   },
   {
@@ -557,7 +569,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "Minimalist Scandinavian furniture e-commerce experience crafted for seamless catalog navigation.",
-    "sortOrder": 45,
+    "sortOrder": 46,
     "published": true
   },
   {
@@ -569,7 +581,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "High-converting brand storefront architecture designed to maximize engagement and cart value.",
-    "sortOrder": 46,
+    "sortOrder": 47,
     "published": true
   },
   {
@@ -581,7 +593,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "Modern typography-driven editorial web template built for agencies and creators.",
-    "sortOrder": 47,
+    "sortOrder": 48,
     "published": true
   },
   {
@@ -593,7 +605,7 @@ const SEED_WORKS: Omit<WorkItem, "createdAt">[] = [
     "posterUrl": null,
     "images": null,
     "description": "Comprehensive brand identity guidelines, typography scales, color palettes and print collateral.",
-    "sortOrder": 48,
+    "sortOrder": 49,
     "published": true
   }
 ];

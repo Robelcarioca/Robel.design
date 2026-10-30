@@ -230,34 +230,16 @@ export function ProjectTile({ work, index, onClick }: ProjectTileProps) {
             </div>
           </div>
         ) : (
-          /* High-res Image / Slides: Complete artwork display without clipping/cropping */
-          <div className="relative size-full flex items-center justify-center overflow-hidden bg-[#ECECEC]">
-            {/* Ambient blurred backdrop of the artwork itself for seamless, edge-to-edge luxury mood lighting */}
-            <img
-              src={safeMediaUrl}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 size-full object-cover blur-2xl opacity-40 scale-110 pointer-events-none select-none"
-            />
-            {/* Crisp full artwork: object-contain for mockups/posters so no parts are cut off, or top hero for ultra-tall scrolls */}
+          /* High-res Image / Slides: Edge-to-edge luxury card display matching video projects */
+          <div className="relative size-full overflow-hidden bg-[#E2E2E2]">
             <img
               key={safeMediaUrl}
               src={safeMediaUrl}
-              alt={`${work.title} slide ${slideIndex + 1}`}
+              alt={`${work.title}${hasSlides ? ` slide ${slideIndex + 1}` : ""}`}
               loading={isPriority ? "eager" : "lazy"}
               decoding="async"
-              onLoad={(e) => {
-                const img = e.currentTarget;
-                if (img.naturalHeight && img.naturalWidth) {
-                  if (img.naturalHeight / img.naturalWidth > 2.6) {
-                    setIsUltraTall(true);
-                  }
-                }
-              }}
-              className={`relative z-10 size-full transition-transform duration-500 ease-out will-change-transform group-hover:scale-[1.02] ${
-                isVeryTall
-                  ? "object-cover object-top"
-                  : "object-contain p-2 sm:p-2.5"
+              className={`size-full transition-transform duration-500 ease-out will-change-transform group-hover:scale-[1.03] ${
+                isVeryTall ? "object-cover object-top" : "object-cover"
               }`}
             />
           </div>

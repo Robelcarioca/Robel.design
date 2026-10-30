@@ -28,8 +28,8 @@ export interface ContactInfo {
 export const contactData: ContactInfo = {
   name: "design robel",
   email: "robelgudissa0000@gmail.com",
-  instagram: "https://instagram.com/robelcario",
-  instagramHandle: "@robelcario",
+  instagram: "https://instagram.com/design_robel",
+  instagramHandle: "@design_robel",
   x: "https://x.com/Robelcario",
   xHandle: "@Robelcario",
   telegram: "https://t.me/ReubenMarsian",

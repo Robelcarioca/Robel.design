@@ -84,7 +84,7 @@ export function CalBooking({ onClose }: CalBookingProps) {
 
   // Time format state
   const [timeFormat, setTimeFormat] = useState<"12h" | "24h">("24h");
-  const [selectedSlot, setSelectedSlot] = useState<string>("08:00");
+  const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [selectedTimezone, setSelectedTimezone] = useState<string>("Africa/Addis_Ababa");
 
   // Step state: "select" | "form" | "confirmed"
@@ -194,8 +194,20 @@ export function CalBooking({ onClose }: CalBookingProps) {
     }
   }, [selectedDay]);
 
+  // Check if selected date is valid (in current viewed month, not past)
+  const isDateValid = useMemo(() => {
+    if (!selectedDay) return false;
+    const dateObj = new Date(currentYear, currentMonth, selectedDay);
+    const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return dateObj >= todayDate;
+  }, [currentYear, currentMonth, selectedDay, now]);
+
+  const isSlotValid = Boolean(selectedSlot);
+  const isDateAndTimeSelected = isDateValid && isSlotValid;
+
   // Format slot for display (12h vs 24h)
-  const formatSlot = (slot: string) => {
+  const formatSlot = (slot: string | null) => {
+    if (!slot) return "";
     if (timeFormat === "24h") return slot;
     const [h, m] = slot.split(":").map(Number);
     const suffix = h >= 12 ? "pm" : "am";
@@ -205,6 +217,12 @@ export function CalBooking({ onClose }: CalBookingProps) {
 
   const handleSlotClick = (slot: string) => {
     setSelectedSlot(slot);
+    setErrorMessage(null);
+    setFieldErrors({});
+  };
+
+  const handleProceedToBooking = () => {
+    if (!isDateAndTimeSelected) return;
     setErrorMessage(null);
     setFieldErrors({});
     setStep("form");
@@ -479,55 +497,80 @@ export function CalBooking({ onClose }: CalBookingProps) {
               </div>
 
               {/* SUBPANEL 3: Right Available Time Slots List */}
-              <div className="w-full xl:w-[240px] shrink-0 p-6 sm:p-7 bg-[#FAFAFA]">
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-[14px] font-semibold text-[#161616]">
-                    {selectedDayName} {selectedDayOrdinal}
-                  </h4>
+              <div className="w-full xl:w-[240px] shrink-0 p-6 sm:p-7 bg-[#FAFAFA] flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-[14px] font-semibold text-[#161616]">
+                      {selectedDayName} {selectedDayOrdinal}
+                    </h4>
 
-                  {/* 12h / 24h Toggle Pill */}
-                  <div className="flex items-center rounded-full bg-[#EDEDED] p-0.5 text-[11px] font-semibold text-[#6A6A6A]">
-                    <button
-                      type="button"
-                      onClick={() => setTimeFormat("12h")}
-                      className={`rounded-full px-2 py-0.5 transition-colors cursor-pointer ${
-                        timeFormat === "12h" ? "bg-white text-[#161616] shadow-xs" : ""
-                      }`}
-                    >
-                      12h
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setTimeFormat("24h")}
-                      className={`rounded-full px-2 py-0.5 transition-colors cursor-pointer ${
-                        timeFormat === "24h" ? "bg-white text-[#161616] shadow-xs" : ""
-                      }`}
-                    >
-                      24h
-                    </button>
+                    {/* 12h / 24h Toggle Pill */}
+                    <div className="flex items-center rounded-full bg-[#EDEDED] p-0.5 text-[11px] font-semibold text-[#6A6A6A]">
+                      <button
+                        type="button"
+                        onClick={() => setTimeFormat("12h")}
+                        className={`rounded-full px-2 py-0.5 transition-colors cursor-pointer ${
+                          timeFormat === "12h" ? "bg-white text-[#161616] shadow-xs" : ""
+                        }`}
+                      >
+                        12h
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setTimeFormat("24h")}
+                        className={`rounded-full px-2 py-0.5 transition-colors cursor-pointer ${
+                          timeFormat === "24h" ? "bg-white text-[#161616] shadow-xs" : ""
+                        }`}
+                      >
+                        24h
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Time Slots Button Grid */}
+                  <div
+                    className={`space-y-2 overflow-y-auto pr-1 scrollbar-none transition-all duration-200 ${
+                      isDateAndTimeSelected ? "max-h-[300px]" : "max-h-[380px]"
+                    }`}
+                  >
+                    {RAW_SLOTS_24H.map((slot) => {
+                      const isSelected = selectedSlot === slot;
+                      return (
+                        <button
+                          key={slot}
+                          type="button"
+                          onClick={() => handleSlotClick(slot)}
+                          className={`w-full h-10 rounded-lg border text-[13px] font-medium transition-all duration-150 flex items-center justify-center cursor-pointer ${
+                            isSelected
+                              ? "bg-[#161616] text-white border-[#161616] shadow-xs"
+                              : "bg-white text-[#161616] border-[rgba(220,220,220,0.8)] hover:border-[#161616] hover:bg-[#F9F9F9]"
+                          }`}
+                        >
+                          {formatSlot(slot)}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
-                {/* Time Slots Button Grid */}
-                <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1 scrollbar-none">
-                  {RAW_SLOTS_24H.map((slot) => {
-                    const isSelected = selectedSlot === slot;
-                    return (
-                      <button
-                        key={slot}
-                        type="button"
-                        onClick={() => handleSlotClick(slot)}
-                        className={`w-full h-10 rounded-lg border text-[13px] font-medium transition-all duration-150 flex items-center justify-center cursor-pointer ${
-                          isSelected
-                            ? "bg-[#161616] text-white border-[#161616] shadow-xs"
-                            : "bg-white text-[#161616] border-[rgba(220,220,220,0.8)] hover:border-[#161616] hover:bg-[#F9F9F9]"
-                        }`}
-                      >
-                        {formatSlot(slot)}
-                      </button>
-                    );
-                  })}
-                </div>
+                {/* "Book Now" Button: hidden until both valid date and time slot are selected */}
+                {isDateAndTimeSelected && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="mt-4 pt-3 border-t border-[rgba(220,220,220,0.6)]"
+                  >
+                    <button
+                      type="button"
+                      id="book-now-button"
+                      onClick={handleProceedToBooking}
+                      className="w-full h-11 rounded-lg bg-[#161616] text-white text-[14px] font-medium flex items-center justify-center gap-2 hover:bg-[#2A2A2A] transition-all cursor-pointer shadow-xs active:scale-[0.98]"
+                    >
+                      <span>Book Now</span>
+                    </button>
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           )}
@@ -660,7 +703,7 @@ export function CalBooking({ onClose }: CalBookingProps) {
                       <span>Scheduling...</span>
                     ) : (
                       <>
-                        <span>Confirm 15 Min Meeting</span>
+                        <span>Book Now</span>
                         <Send className="size-3.5" />
                       </>
                     )}

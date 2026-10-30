@@ -6,7 +6,9 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://designrobel.com";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://robel-design-21sv.vercel.app");
 
 /** Resolve an OG image URL — handles both absolute (Supabase) and relative (/works/...) paths */
 function resolveOgImage(url: string): string {
@@ -36,6 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = work.description;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title,
     description,
     openGraph: {
@@ -43,6 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       type: "website",
       url: `${SITE_URL}/works/${id}`,
+      siteName: "design robel",
       images: [
         {
           url: resolvedOg,
@@ -56,6 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
+      creator: "@design_robel",
       images: [resolvedOg],
     },
   };

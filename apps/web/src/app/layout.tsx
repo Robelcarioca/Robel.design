@@ -11,27 +11,43 @@ const inter = Inter({
   display: "swap",
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://robel-design-21sv.vercel.app");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "design robel — Designer & Web Developer",
   description: "Graphic design, UI/UX, web development, presentations and event production by design robel.",
   icons: {
-    icon: "/brand/robel.jpg",
-    shortcut: "/brand/robel.jpg",
-    apple: "/brand/robel.jpg",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "design robel — Designer & Web Developer",
     description: "Graphic design, UI/UX, web development, presentations and event production by design robel.",
     type: "website",
-    url: "https://instagram.com/design_robel",
-    images: [{ url: "/works/Nike/nike_05_landscape.jpg", width: 1200, height: 630, alt: "design robel portfolio" }],
+    url: SITE_URL,
+    siteName: "design robel",
+    images: [
+      {
+        url: "https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Nike/nike_05_landscape.jpg",
+        width: 1200,
+        height: 630,
+        alt: "design robel — Featured Works & Projects",
+        type: "image/jpeg",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "design robel — Designer & Web Developer",
     description: "Graphic design, UI/UX, web development, presentations and event production by design robel.",
-    creator: "@Robelcario",
-    images: ["/works/Nike/nike_05_landscape.jpg"],
+    creator: "@design_robel",
+    images: [
+      "https://pyomtbydcmylvtivtfxz.supabase.co/storage/v1/object/public/uploads/works/Nike/nike_05_landscape.jpg",
+    ],
   },
 };
 
